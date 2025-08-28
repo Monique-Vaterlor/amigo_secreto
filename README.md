@@ -1,31 +1,27 @@
-# Sorteio de Amigo Secreto
+# Sorteador de Amigo Secreto 🎁
 
-Este é um simples aplicativo de sorteio de Amigo Secreto, onde os participantes podem inserir seus nomes, realizar o sorteio e ver os resultados.
+Este é um projeto simples e interativo desenvolvido como um desafio de programação front-end. A aplicação permite que os usuários criem uma lista de participantes e realizem um sorteio aleatório para determinar quem é o "amigo secreto". É uma ferramenta ideal para organizar brincadeiras de fim de ano de forma rápida e divertida.
 
-## Funcionalidades
+## ✨ Funcionalidades Principais
 
-- Adicionar amigos à lista.
-- Realizar o sorteio de Amigo Secreto.
-- Exibir os resultados com quem cada pessoa tirou.
+O projeto implementa as seguintes funcionalidades:
 
-## Como Usar
+  - **Adicionar Nomes:** Um campo de texto permite inserir o nome dos participantes um a um.
+  - **Listagem Dinâmica:** Os nomes adicionados são exibidos em uma lista visível na tela.
+  - **Validação de Entrada:**
+      - O sistema impede a adição de nomes em branco, exibindo um alerta ao usuário.
+      - Impede a adição de nomes duplicados para garantir a integridade do sorteio.
+  - **Sorteio Aleatório:** Um botão "Sortear Amigo" seleciona um nome da lista de forma totalmente aleatória.
+  - **Exibição do Resultado:** O nome do amigo sorteado é destacado na tela após o sorteio.
+  - **Usabilidade:** É possível adicionar nomes pressionando a tecla "Enter", além do clique no botão.
 
-1. Abra o arquivo `index.html` no seu navegador.
-2. Digite o nome de cada amigo no campo de texto e clique em "Adicionar" para adicioná-los à lista.
-3. Quando houver pelo menos 2 amigos, clique em "Sortear amigo" para realizar o sorteio.
-4. O resultado será exibido com o nome de quem cada pessoa tirou.
+## 🛠️ Tecnologias Utilizadas
 
-## Estrutura do Projeto
+Este projeto foi construído utilizando tecnologias web fundamentais, sem a necessidade de frameworks ou bibliotecas externas.
 
-- **index.html**: Contém a estrutura HTML do aplicativo.
-- **style.css**: Arquivo CSS com o estilo visual da página.
-- **app.js**: Arquivo JavaScript que contém a lógica do sorteio.
-
-## Tecnologias Usadas
-
-- HTML5
-- CSS3
-- JavaScript
+  - **HTML5:** Para a estruturação e semântica do conteúdo.
+  - **CSS3:** Para a estilização e o design responsivo.
+  - **JavaScript:** Para toda a lógica funcional, manipulação do DOM e interatividade.
 
 ## Licença
 
