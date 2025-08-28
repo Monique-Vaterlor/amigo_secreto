@@ -2,75 +2,61 @@
 // Array para armazenar os nomes dos amigos
 let amigos = [];
 
-// Função para adicionar amigos ao array
 function adicionarAmigo() {
-    const nomeInput = document.getElementById("amigo"); // Captura o campo de input
-    const nome = nomeInput.value.trim(); // Remove espaços em branco antes e depois do nome
+    // Seleciona os elementos do DOM
+    const inputAmigo = document.getElementById('amigo');
+    const listaAmigos = document.getElementById('listaAmigos');
+    const nome = inputAmigo.value.trim(); // Pega o nome e remove espaços em branco
 
-    if (nome === "") {
-        alert("Por favor, insira um nome válido.");
+    // 1. Valida se o campo de nome está vazio
+    if (nome === '') {
+        alert('Por favor, digite um nome para adicionar.');
         return;
     }
 
-    // Adiciona o nome ao array de amigos
+    // 2. Valida se o nome já existe na lista
+    if (amigos.map(a => a.toLowerCase()).includes(nome.toLowerCase())) {
+        alert('Este nome já foi adicionado. Por favor, insira um nome diferente.');
+        inputAmigo.value = ''; // Limpa o campo para nova digitação
+        return;
+    }
+
+    // Adiciona o nome ao array
     amigos.push(nome);
-    nomeInput.value = ""; // Limpa o campo de input após adicionar o nome
 
-    // Atualiza a lista de amigos na interface
-    atualizarListaAmigos();
+    // Atualiza a lista de nomes na tela. Adiciona o novo amigo como um item de lista (li)
+    const novoAmigoItem = document.createElement('li');
+    novoAmigoItem.textContent = nome;
+    listaAmigos.appendChild(novoAmigoItem);
+
+    // Limpa o campo de input e foca nele novamente
+    inputAmigo.value = '';
+    inputAmigo.focus();
 }
 
-// Função para atualizar a lista de amigos exibida na tela
-function atualizarListaAmigos() {
-    const lista = document.getElementById("listaAmigos");
-    lista.innerHTML = ""; // Limpa a lista antes de adicionar novos nomes
-
-    // Adiciona cada nome na lista exibida
-    amigos.forEach((amigo) => {
-        const li = document.createElement("li");
-        li.textContent = amigo;
-        lista.appendChild(li);
-    });
-}
-
-// Função para realizar o sorteio
+/**
+ * Realiza o sorteio de um amigo da lista.
+ */
 function sortearAmigo() {
-    // Verifica se há pelo menos 2 amigos para realizar o sorteio
+    const resultado = document.getElementById('resultado');
+
+    // Valida se há pelo menos 2 amigos para o sorteio
     if (amigos.length < 2) {
-        alert("É necessário adicionar pelo menos 2 amigos para realizar o sorteio.");
+        alert('Você precisa de pelo menos 2 amigos na lista para fazer o sorteio.');
         return;
     }
 
-    let amigosSorteados = [...amigos]; // Cria uma cópia do array de amigos
-    let sorteados = [];  // Array para armazenar os amigos sorteados
+    // Gera um índice aleatório
+    const indiceSorteado = Math.floor(Math.random() * amigos.length);
+    const amigoSorteado = amigos[indiceSorteado];
 
-    // Realiza o sorteio
-    for (let i = 0; i < amigos.length; i++) {
-        let indiceSorteado;
+    // Exibe o resultado na tela
+    resultado.innerHTML = `<li>O amigo secreto sorteado é: <strong>${amigoSorteado}</strong>!</li>`;
+}
 
-        // Evita que uma pessoa tire ela mesma
-        do {
-            indiceSorteado = Math.floor(Math.random() * amigosSorteados.length);
-        } while (amigosSorteados[indiceSorteado] === amigos[i] || sorteados.includes(amigosSorteados[indiceSorteado]));
-
-        sorteados.push(amigosSorteados[indiceSorteado]);
-        amigosSorteados.splice(indiceSorteado, 1);  // Remove o nome sorteado da lista
+// Bônus: Permite adicionar com a tecla "Enter"
+document.getElementById('amigo').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        adicionarAmigo();
     }
-
-    // Exibe o resultado do sorteio
-    exibirResultado(sorteados);
-}
-
-// Função para exibir o resultado do sorteio
-function exibirResultado(sorteados) {
-    const resultadoDiv = document.getElementById("resultado");
-    resultadoDiv.innerHTML = "";  // Limpa o resultado anterior
-
-    // Exibe o resultado do sorteio
-    sorteados.forEach((amigoSorteado, index) => {
-        const paragrafo = document.createElement("li");
-        paragrafo.textContent = `${amigos[index]} tirou ${amigoSorteado}`;
-        resultadoDiv.appendChild(paragrafo);
-    });
-}
-
+});
